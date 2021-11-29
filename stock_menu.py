@@ -5,11 +5,11 @@ Created on Mon Aug 30 22:57:11 2021
 @author: D99003734
 """
 from datetime import datetime
-from account_class import Robo, Traditional
 from stock_class import Stock, DailyData
+from account_class import  Traditional, Robo
+import matplotlib.pyplot as plt
 import json
 import csv
-
 
 def add_stock(stock_list):
       option = ""
@@ -20,7 +20,7 @@ def add_stock(stock_list):
           shares = float(input("Enter shares:"))
           new_stock = Stock(symbol,name,shares)
           stock_list.append(new_stock)
-          option = input("Press to add another stock or 0 to quit")
+          option = input("Press to add another stock or 0 to quit: ")
         
 # Remove stock and all daily data
 def delete_stock(stock_list):
@@ -29,8 +29,6 @@ def delete_stock(stock_list):
     for stock in stock_list:
         print(stock.symbol," ",end="")
     print("]")
-    
-
     symbol = input("Which stock do you want to delete?:").upper()
     found = False
     i=0
@@ -52,9 +50,8 @@ def list_stocks(stock_list):
     print("SYMBOL\t\tNAME\t\tSHARES")
     print("====================================")
     for stock in stock_list:
-       print(stock.symbol," " * (14-len(stock.symbol)),stock.name," " * (14-len(stock.name)),stock.shares)
-       print()
-       
+        print(stock.symbol," " * (14-len(stock.symbol)),stock.name," " * (14-len(stock.name)),stock.shares)
+    print()
     _= input("Press enter to continue")
     
     # Add Daily Stock Data
@@ -71,23 +68,23 @@ def add_stock_data(stock_list):
             found = True
             current_stock = stock
             
-       if found == True:
-        print("Ready to add data for: ",symbol)
-        print("Enter Data Separated by Commas - Do Not use Spaces")
-        print("Enter a Blank Line to Quit")
-        print("Enter Date,Price,Volume")
-        print("Example: 8/28/20,47.85,10550")
-        data = input("Enter Date,Price,Volume: ")
-        while data != "":
+   if found == True:
+         print("Ready to add data for: ",symbol)
+         print("Enter Data Separated by Commas - Do Not use Spaces")
+         print("Enter a Blank Line to Quit")
+         print("Enter Date,Price,Volume")
+         print("Example: 8/28/20,47.85,10550")
+         data = input("Enter Date,Price,Volume: ")
+         while data != "":
             date, price, volume = data.split(",")
             daily_data = DailyData(date,float(price),float(volume))
             
             current_stock.add_data(daily_data)
             data = input("Enter Date,Price,Volume: ")
-        print("Date Entry Complete")
+         print("Date Entry Complete")
    else:
-        print("Symbol Not Found ***")
-        _= input("Press Enter to Continue ***")
+         print("Symbol Not Found ***")
+   _= input("Press Enter to Continue ***")
     
 def investment_type(stock_list):
     print("Investment Account ---")
@@ -131,12 +128,40 @@ def investment_type(stock_list):
 
 # Function to create stock chart
 def display_stock_chart(stock_list,symbol):
-    print("This method is under construction")
+    date = []
+    price = []
+    volume = []
+    company = ""
+    for stock in stock_list:
+        company = stock.name
+        for dailyData in stock.DataList:
+            date.append(dailyData.date)
+            price.append(dailyData.close)
+            volume.append(dailyData.volume)
+    plt.plot(date, price)
+    plt.xlabel("Date")
+    plt.ylabel("Price")
+    plt.title(company)
+    plt.show()
 
 # Display Chart
 def display_chart(stock_list):
-    print("This method is under construction")
-  
+    print("Stock Chart")
+    print("Stock List: [", end="")
+    for stock in stock_list:
+        print(stock.symbol," ",end="")
+    print("]")
+    symbol = input("Pick stock for a chart:").upper()
+    found = False
+    for stock in stock_list:
+        if stock.symbol == symbol:
+            found = True
+            current_stock = stock
+    if found == True:
+        display_stock_chart(stock_list, current_stock.symbol)
+    else: 
+        print("Symbol not found")
+        _= input("Press enter to continue")
 
     
 #object encoder and decoder pasted here
