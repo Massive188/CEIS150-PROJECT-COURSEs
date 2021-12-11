@@ -49,7 +49,7 @@ def list_stocks(stock_list):
     print("SYMBOL\t\t\tNAME\t\t\tSHARES")
     print("==========================================")
     for stock in stock_list:
-        print(stock.symbol," " * (14-len(stock.symbol)),stock.name," " * (14-len(stock.name)),stock.shares)
+        print(stock.symbol," " * (14-len(stock.symbol)),stock.name," " * (14-len(stock.name)),stock.shares) #problem
     print()
     _= input("Press enter to continue")
     
@@ -330,7 +330,7 @@ def main_menu(stock_list):
 # Begin program
 def main():
     stock_list = []
-    main_menu(stock_list)
+    main_menu(stock_list) #problem
 # Program Starts Here
 if __name__ == "__main__":
         # execute only if run as a stand-alone script
