@@ -49,24 +49,7 @@ def list_stocks(stock_list):
     print("SYMBOL\t\tNAME\t\tSHARES")
     print("======================================")
     for stock in stock_list:
-'''
-need help with line 55, whenever i try to veiw the stock list it keeps presenting a message ("Backend TkAgg is interactive backend. Turning interactive mode on")
-in the terminal, while an error message is displayed saying that theres multiple lines needed to be checked before proceeding: Line = 52, 314, 329 and 333.
 
-Heres the error message:
-========================================
-Exception has occurred: AttributeError
-'Stock' object has no attribute 'symbol'
-  File "C:\Users\allro\OneDrive\Desktop\All Home Apps\Career Projects\.vscode\CEIS150 python\stock_menu.py", line 52, in list_stocks
-    print(stock.symbol," " * (14-len(stock.symbol)),stock.name," " * (14-len(stock.name)),stock.shares)
-  File "C:\Users\allro\OneDrive\Desktop\All Home Apps\Career Projects\.vscode\CEIS150 python\stock_menu.py", line 314, in main_menu
-    list_stocks(stock_list)
-  File "C:\Users\allro\OneDrive\Desktop\All Home Apps\Career Projects\.vscode\CEIS150 python\stock_menu.py", line 329, in main
-    main_menu(stock_list)
-  File "C:\Users\allro\OneDrive\Desktop\All Home Apps\Career Projects\.vscode\CEIS150 python\stock_menu.py", line 333, in <module>
-    main()
-
-'''
          print(stock.symbol," " * (14-len(stock.symbol)),stock.name," " * (14-len(stock.name)),stock.shares)
     print()
     _= input("Press enter to continue")
